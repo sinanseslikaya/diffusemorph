@@ -1,3 +1,9 @@
+# Our Project (UVA)
+
+Our project is to take DiffuseMorph and do generalizability testing on it. The remainder of the README is directly their work.
+
+
+
 <img src="./img/representative.png">
 
 # DiffuseMorph
