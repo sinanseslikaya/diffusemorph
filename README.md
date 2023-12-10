@@ -2,7 +2,16 @@
 
 Our project is to take DiffuseMorph and do generalizability testing on it. The remainder of the README is directly their work.
 
+```extra reqs for Rivanna
+pip install typing-extensions==4.3.0
+pip install dominate
+pip install visdom
+```
 
+setup visdom server using
+```
+python3 -m visdom.server
+```
 
 <img src="./img/representative.png">
 
