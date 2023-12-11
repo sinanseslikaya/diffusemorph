@@ -160,6 +160,7 @@ if __name__ == "__main__":
             nsamp = visuals['contF'].shape[0]
             for isamp in range(0, nsamp):
                 real_C = test_data['MC'].squeeze()
+                print(real_C.shape)
                 real_C = real_C.permute(2, 0, 1).unsqueeze(0).cuda()
                 out_y0 = stn(real_C[:, 0:1], visuals['contF'][isamp:isamp+1].cuda())
                 out_y1 = stn(real_C[:, 1:2], visuals['contF'][isamp:isamp+1].cuda())
