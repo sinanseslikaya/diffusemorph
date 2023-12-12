@@ -21,14 +21,17 @@ class DDPM(BaseModel):
         # set loss and load resume state
         self.set_loss()
         self.set_new_noise_schedule(opt['model']['beta_schedule']['train'], schedule_phase='train')
+        # self.optG = torch.optim.Adam()
+        self.optGOptimizer = {}; 
         self.load_network()
+       
         if self.opt['phase'] == 'train':
             self.netG.train()
             # find the parameters to optimize
             if opt['model']['finetune_norm']:
                 optim_params = []
                 for k, v in self.netG.named_parameters():
-                    v.requires_grad = False
+                    v.requires_grad = False 
                     if k.find('transformer') >= 0:
                         v.requires_grad = True
                         v.data.zero_()
@@ -39,6 +42,8 @@ class DDPM(BaseModel):
                 optim_params = list(self.netG.parameters())
 
             self.optG = torch.optim.Adam(optim_params, lr=opt['train']["optimizer"]["lr"], betas=(0.5, 0.999))
+            if len(self.optGOptimizer) > 0:
+                self.optG.load_state_dict(self.optGOptimizer)
             self.log_dict = OrderedDict()
         self.print_network(self.netG)
 
@@ -193,6 +198,7 @@ class DDPM(BaseModel):
             if self.opt['phase'] == 'train':
                 # optimizer
                 opt = torch.load(opt_path)
-                self.optG.load_state_dict(opt['optimizer'])
+                # self.optG.load_state_dict(opt['optimizer'])
+                self.optGOptimizer = opt['optimizer']
                 self.begin_step = opt['iter']
                 self.begin_epoch = opt['epoch']

@@ -10,7 +10,7 @@
         "tb_logger": "tb_logger",
         "results": "results",
         "checkpoint": "checkpoint",
-        "resume_state": "experiments/DiffuseMorph_2D_231211_151632/checkpoint/I40_E40"
+        "resume_state": "experiments/DiffuseMorph_2D_231211_220910/checkpoint/I560_E560"
     },
     "datasets": {
         "centered": true,
