@@ -1,6 +1,6 @@
 # Our Project (UVA)
 
-Our project is to take DiffuseMorph and do generalizability testing on it. The remainder of the README is directly their work.
+Our project is to take DiffuseMorph and do generalizability testing on it. 
 
 ```extra reqs for Rivanna
 pip install typing-extensions==4.3.0
@@ -12,6 +12,28 @@ setup visdom server using
 ```
 python3 -m visdom.server
 ```
+
+Due to the original implementation of DiffuseMorph and its lack of documentation, the training step is burdensome and must be done manually.
+
+First, we must make folders of image pairs and place them in /toy_sample/. Next, we name one "train" and run the training code: 
+
+```train
+python3 main_2D.py -p train -c config/diffuseMorph_train_2D.json
+```
+
+This gives us the start of the model. Next, we change make the trianing folder the next image fair we want to work on. Next, we change the diffuseMorph_train_2D.json file to set the resume state to be the last checkpoint of the previous training run and increment the n_epochs variable by 40. Repeat these steps until we hit every single training pair. The very last checkpoint is our trained model.
+
+We understand that this is very tedious and could be automated. We simply didn't not have enough time to come up with a working script that moves files around and modifies the config files. The lack of any documentation from the original team leads us to believe they do not have any other intended way of training the model with many pairs of images. 
+
+To test, make folders of image pairs to test in the same /toy_sample/ directory with the filename test. Modify diffuseMorph_test_2D.json file to make the resume state our trained model. Now you can run on as many test image pairs as you want to.
+
+Aside about downsampling the brain slices:
+[JACK ADD HERE]
+
+
+
+
+### The remainder of the README is directly their original work.
 
 <img src="./img/representative.png">
 
