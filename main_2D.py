@@ -10,6 +10,8 @@ import time
 from util.visualizer import Visualizer
 from PIL import Image
 import numpy as np
+from skimage.metrics import structural_similarity as ssim
+
 
 def save_image(image_numpy, image_path):
     image_pil = Image.fromarray(image_numpy.astype('uint8'))
@@ -174,3 +176,6 @@ if __name__ == "__main__":
             denom = np.sum((data_fixedRGB) ** 2 )
             nmse = numer / denom
             print('NMSE_%s_TO_%s: %.4f' % (dataXinfo, dataYinfo, nmse))
+
+            ssim_value, _ = ssim(data_fixedRGB, regist_dataRGB, full=True, multichannel=True)
+            print('SSIM_%s_TO_%s: %.4f' % (dataXinfo, dataYinfo, ssim_value))
