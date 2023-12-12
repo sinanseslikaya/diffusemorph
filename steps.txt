@@ -1,0 +1,17 @@
+write a function that splits existing Registration Datasets from canvas into N pairs
+
+run training with defualt config file
+
+copy the path of the last checkpoint from the previous run and put it as the resume state of the json
+increment n_epoch by 40
+
+keep doing this until we do all the pairs
+
+*------*
+
+write a function that splits the brainslices from google drive into M pairs
+
+set testing json to the last training checkpoint
+
+run the testing script with each pair and report results
+
