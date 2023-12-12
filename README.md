@@ -28,7 +28,10 @@ We understand that this is very tedious and could be automated. We simply didn't
 To test, make folders of image pairs to test in the same /toy_sample/ directory with the filename test. Modify diffuseMorph_test_2D.json file to make the resume state our trained model. Now you can run on as many test image pairs as you want to.
 
 Aside about downsampling the brain slices:
-[JACK ADD HERE]
+The original brain images were of the dimensions 256x256x8. To use DiffuseMorph in 2D, slicing of the images must occur to convert them into 256x256 images. Additionally, the large image size can significantly increase computation time; in order to lower the computation time, images were downsampled to 64x64 - therefore, each 256x256x8 scan was converted into eight 64x64 images using skimage.transform.resize.
+
+Ensure that, when using grayscale images that do not have RGB channels, that the image is tiled; i.e. a 64x64 image should be tiled (using numpy) to create a 64x64x3 image.
+This is automatically performed for 2D images that do not have RGB channels associated with them on import.
 
 
 
